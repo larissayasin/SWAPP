@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Star Wars APP</string>
+    <string name="swapi">https://swapi.co/api/</string>
+    <string name="omdbapi">http://www.omdbapi.com/?apikey=ec1e8bbb</string>
 </resources>

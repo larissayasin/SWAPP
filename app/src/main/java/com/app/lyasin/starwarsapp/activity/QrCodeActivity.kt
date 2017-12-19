@@ -1,7 +1,8 @@
-package com.app.lyasin.starwarsapp
+package com.app.lyasin.starwarsapp.activity
 
 import android.os.Bundle
 import android.util.Log
+import com.app.lyasin.starwarsapp.R
 import com.google.zxing.Result
 import io.vrinda.kotlinpermissions.PermissionCallBack
 import io.vrinda.kotlinpermissions.PermissionsActivity

@@ -1,4 +1,4 @@
-package com.app.lyasin.starwarsapp
+package com.app.lyasin.starwarsapp.model
 
 import io.realm.RealmObject
 

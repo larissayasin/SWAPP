@@ -21,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.QrCodeActivity"></activity>
-        <activity android:name=".activity.CharacterActivity"></activity>
+        <activity android:name=".activity.QrCodeActivity"
+            android:noHistory="true"/>
+        <activity android:name=".activity.CharacterActivity"
+            android:parentActivityName=".activity.MainActivity"/>
     </application>
 
 </manifest>

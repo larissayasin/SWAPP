@@ -2,5 +2,7 @@
     <string name="app_name">Star Wars APP</string>
     <string name="qrcode_text">QRTEXT</string>
     <string name="swapi">https://swapi.co/api/</string>
-    <string name="omdbapi">http://www.omdbapi.com/?apikey=ec1e8bbb</string>
+    <string name="omdbapi">http://www.omdbapi.com</string>
+    <string name="omdbtoken">ec1e8bbb</string>
+    <string name="error_message">Something went wrong</string>
 </resources>

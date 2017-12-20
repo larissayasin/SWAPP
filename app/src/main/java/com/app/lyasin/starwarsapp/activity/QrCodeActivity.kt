@@ -49,7 +49,7 @@ class QrCodeActivity : PermissionsActivity() , ZXingScannerView.ResultHandler  {
     }
 
     override fun handleResult(rawResult: Result) {
-        startActivity<CharacterActivity>(getString(R.string.qrcode_text) to rawResult.text)
+        startActivity<CharacterActivity>(getString(R.string.from_qrcode) to rawResult.text)
 
        // mScannerView?.resumeCameraPreview(this)
     }

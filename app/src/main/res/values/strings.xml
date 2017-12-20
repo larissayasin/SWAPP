@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Star Wars APP</string>
-    <string name="qrcode_text">QRTEXT</string>
+    <string name="from_qrcode">QRTEXT</string>
+    <string name="from_db">DB</string>
     <string name="swapi">https://swapi.co/api/</string>
     <string name="omdbapi">http://www.omdbapi.com</string>
     <string name="omdbtoken">ec1e8bbb</string>

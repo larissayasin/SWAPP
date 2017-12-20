@@ -2,8 +2,10 @@ package com.app.lyasin.starwarsapp.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.app.lyasin.starwarsapp.R
+import com.app.lyasin.starwarsapp.adapter.FilmsAdapter
 import com.app.lyasin.starwarsapp.factory.RetrofitFactory
 import com.app.lyasin.starwarsapp.model.Character
 import com.app.lyasin.starwarsapp.model.Film
@@ -18,12 +20,14 @@ import retrofit2.Retrofit
 class CharacterActivity : AppCompatActivity() {
 
     val realm = Realm.getDefaultInstance()
+    var filmsList : ArrayList<Film> = ArrayList()
+    var adapter : FilmsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
         val intent = intent
-        if (intent.extras[getString(R.string.qrcode_text)] != null) {
-            searchCharacter(intent.getStringExtra(getString(R.string.qrcode_text)))
+        if (intent.extras[getString(R.string.from_qrcode)] != null) {
+            searchCharacter(intent.getStringExtra(getString(R.string.from_qrcode)))
         }
     }
 
@@ -80,6 +84,7 @@ class CharacterActivity : AppCompatActivity() {
                     .subscribe({ filmPoster ->
                         film.Poster = filmPoster.Poster
                         saveFilm(film)
+                        adapter?.addItem(film)
                     }, { error ->
 
                         toast(getString(R.string.error_message))
@@ -101,6 +106,12 @@ class CharacterActivity : AppCompatActivity() {
     }
 
     private fun updateView(character: Character) {
+        adapter = FilmsAdapter(filmsList, this)
+        rv_films.adapter =  adapter
+        val llm = LinearLayoutManager(this)
+        llm.orientation = LinearLayoutManager.VERTICAL
+        rv_films.layoutManager = llm
+
         tv_character_details_name.text = character.name
         tv_character_details_url.text = character.url
     }

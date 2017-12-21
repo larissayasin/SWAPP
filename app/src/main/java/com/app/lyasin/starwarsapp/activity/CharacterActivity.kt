@@ -14,8 +14,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_character.*
+import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.toast
 import retrofit2.Retrofit
+import java.util.*
 
 class CharacterActivity : AppCompatActivity() {
 
@@ -26,7 +28,11 @@ class CharacterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
         val intent = intent
-        if (intent.extras[getString(R.string.from_qrcode)] != null) {
+
+        if(intent.extras[getString(R.string.from_db)] != null){
+            searchCharacterDB(intent.getStringExtra(getString(R.string.from_db)))
+        }
+        else if (intent.extras[getString(R.string.from_qrcode)] != null) {
             searchCharacter(intent.getStringExtra(getString(R.string.from_qrcode)))
         }
     }
@@ -34,6 +40,8 @@ class CharacterActivity : AppCompatActivity() {
     private fun searchCharacter(qrcodeUrl: String) {
         val retrofit: Retrofit? = RetrofitFactory[qrcodeUrl]
         if (retrofit != null) {
+            val dialog = indeterminateProgressDialog (message = "Loading character…", title = "Fetching data")
+            dialog.show()
             val service = retrofit.create(SWService::class.java)
 
             val observable = service.getCharacter("")
@@ -41,12 +49,14 @@ class CharacterActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ character ->
+                        character.time = Date().toString()
                         saveCharacter(character)
                         searchFilms(character)
                         Log.d("TAG", character.name)
                         updateView(character)
+                        dialog.cancel()
                     }, { error ->
-
+                        dialog.cancel()
                         toast(getString(R.string.error_message))
                         Log.d("TAG", error.toString())
                     })
@@ -65,6 +75,7 @@ class CharacterActivity : AppCompatActivity() {
                             .subscribe({ film ->
                                 character.filmsDetails.add(film)
                                 saveCharacter(character)
+                                adapter?.addItem(film)
                                 searchPoster(film)
                             }, { error ->
                                 toast(getString(R.string.error_message))
@@ -83,12 +94,13 @@ class CharacterActivity : AppCompatActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ filmPoster ->
                         film.Poster = filmPoster.Poster
+                        film.Website = filmPoster.Website
                         saveFilm(film)
-                        adapter?.addItem(film)
+                        adapter?.updateItem(film)
                     }, { error ->
 
                         toast(getString(R.string.error_message))
-                        Log.d("TAG", error.toString())
+                        //Log.d("TAG", error.toString())
                     })
         }
     }
@@ -105,6 +117,14 @@ class CharacterActivity : AppCompatActivity() {
         realm.commitTransaction()
     }
 
+    private fun searchCharacterDB(url : String){
+       val localCharacter =  realm.where(Character::class.java).equalTo("url", url).findFirst()
+        filmsList = ArrayList(localCharacter?.filmsDetails)
+        if (localCharacter != null) {
+            updateView(localCharacter)
+        }
+    }
+
     private fun updateView(character: Character) {
         adapter = FilmsAdapter(filmsList, this)
         rv_films.adapter =  adapter
@@ -112,7 +132,9 @@ class CharacterActivity : AppCompatActivity() {
         llm.orientation = LinearLayoutManager.VERTICAL
         rv_films.layoutManager = llm
 
-        tv_character_details_name.text = character.name
-        tv_character_details_url.text = character.url
+        tv_character_details_name.text = String.format(getString(R.string.name), character.name)
+        tv_character_details_url.text = String.format(getString(R.string.url), character.url)
+        tv_character_details_birth.text = String.format(getString(R.string.birth), character.birth_year)
+        tv_character_record_date.text = String.format(getString(R.string.recorded), character.time)
     }
 }

@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllCharacters(){
+        charactersList.clear()
         charactersList.addAll(realm.where(Character::class.java).findAll())
         updateView()
     }

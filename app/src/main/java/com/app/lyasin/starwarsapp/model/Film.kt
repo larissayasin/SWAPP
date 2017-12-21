@@ -9,4 +9,5 @@ open class Film : RealmObject(){
     var title: String = ""
     var episode_id: Int = 0
     var Poster : String = ""
+    var Website : String = ""
 }

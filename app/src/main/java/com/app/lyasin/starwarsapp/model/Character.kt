@@ -11,4 +11,5 @@ open class Character : RealmObject(){
     var films: RealmList<String> = RealmList()
     var filmsDetails : RealmList<Film> = RealmList()
     var time: String = ""
+    var birth_year : String = ""
 }

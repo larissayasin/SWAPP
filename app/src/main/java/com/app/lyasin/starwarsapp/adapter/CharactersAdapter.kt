@@ -24,22 +24,23 @@ class CharactersAdapter(private val characters: ArrayList<Character>,
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_character, parent, false)
-        return ViewHolder(view, context)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return characters.size
     }
 
-    class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView),  View.OnClickListener {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),  View.OnClickListener {
 
         fun bindView(character: Character) {
             itemView.tv_character_name.text = character.name
             itemView.tv_character_url.text = character.url
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
-            view?.context?.startActivity<CharacterActivity>(view.context.getString(R.string.from_db) to view)
+            view?.context?.startActivity<CharacterActivity>(view.context.getString(R.string.from_db) to view.tv_character_url.text )
         }
 
     }

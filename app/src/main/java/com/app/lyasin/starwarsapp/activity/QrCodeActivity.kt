@@ -1,7 +1,6 @@
 package com.app.lyasin.starwarsapp.activity
 
 import android.os.Bundle
-import android.util.Log
 import com.app.lyasin.starwarsapp.R
 import com.google.zxing.Result
 import io.vrinda.kotlinpermissions.PermissionCallBack
@@ -25,12 +24,12 @@ class QrCodeActivity : PermissionsActivity() , ZXingScannerView.ResultHandler  {
             requestPermissions(arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE), object : PermissionCallBack {
                 override fun permissionGranted() {
                     super.permissionGranted()
-                    Log.v("Camera permissions", "Granted")
+                   // Log.v("Camera permissions", "Granted")
                 }
 
                 override fun permissionDenied() {
                     super.permissionDenied()
-                    Log.v("Camera permissions", "Denied")
+                 //   Log.v("Camera permissions", "Denied")
                     finish()
                 }
             })

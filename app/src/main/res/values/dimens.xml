@@ -4,4 +4,5 @@
     <dimen name="small_text">12sp</dimen>
     <dimen name="big_text">18sp</dimen>
     <dimen name="card_elevation">8dp</dimen>
+    <dimen name="padding_text">8dp</dimen>
 </resources>

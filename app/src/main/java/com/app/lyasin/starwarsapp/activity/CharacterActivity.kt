@@ -52,13 +52,13 @@ class CharacterActivity : AppCompatActivity() {
                         character.time = Date().toString()
                         saveCharacter(character)
                         searchFilms(character)
-                        Log.d("TAG", character.name)
+                        //Log.d("TAG", character.name)
                         updateView(character)
                         dialog.cancel()
                     }, { error ->
                         dialog.cancel()
                         toast(getString(R.string.error_message))
-                        Log.d("TAG", error.toString())
+                      //  Log.d("TAG", error.toString())
                     })
         }
     }

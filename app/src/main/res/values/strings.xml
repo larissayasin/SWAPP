@@ -11,5 +11,6 @@
     <string name="url">URL: %1$s</string>
     <string name="birth">Birth Year: %1$s</string>
     <string name="recorded">Recorded: %1$s</string>
+    <string name="poster">Poster</string>
 
 </resources>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Star Wars APP</string>
+    <string name="from_qrcode">QRTEXT</string>
+    <string name="from_db">DB</string>
+    <string name="swapi">https://swapi.co/api/</string>
+    <string name="omdbapi">http://www.omdbapi.com</string>
+    <string name="omdbtoken">ec1e8bbb</string>
+    <string name="error_message">Something went wrong</string>
+    <string name="name">Name: %1$s</string>
+    <string name="title">Title: %1$s </string>
+    <string name="url">URL: %1$s</string>
+    <string name="birth">Birth Year: %1$s</string>
+    <string name="recorded">Recorded: %1$s</string>
+    <string name="poster">Poster</string>
+
+</resources>

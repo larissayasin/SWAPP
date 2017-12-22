@@ -15,5 +15,5 @@ Posters dos filmes: http://www.omdbapi.com/
 * [Glide](https://bumptech.github.io/glide/)
 
 ###Telas
-[Imgur](https://i.imgur.com/cicJbcQ.png)
-[Imgur](https://i.imgur.com/fh59oQy.png)
+[Tela 1](https://i.imgur.com/cicJbcQ.png)
+[Tela 2](https://i.imgur.com/fh59oQy.png)

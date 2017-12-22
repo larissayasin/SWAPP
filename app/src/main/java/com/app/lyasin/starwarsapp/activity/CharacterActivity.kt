@@ -38,28 +38,33 @@ class CharacterActivity : AppCompatActivity() {
     }
 
     private fun searchCharacter(qrcodeUrl: String) {
-        val retrofit: Retrofit? = RetrofitFactory[qrcodeUrl]
-        if (retrofit != null) {
-            val dialog = indeterminateProgressDialog (message = "Loading character…", title = "Fetching data")
-            dialog.show()
-            val service = retrofit.create(SWService::class.java)
+        if (qrcodeUrl.contains(getString(R.string.swapi))) {
+            val retrofit: Retrofit? = RetrofitFactory[qrcodeUrl]
+            if (retrofit != null) {
+                val dialog = indeterminateProgressDialog(message = "Loading character…", title = "Fetching data")
+                dialog.show()
+                val service = retrofit.create(SWService::class.java)
 
-            val observable = service.getCharacter("")
-            observable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ character ->
-                        character.time = Date().toString()
-                        saveCharacter(character)
-                        searchFilms(character)
-                        //Log.d("TAG", character.name)
-                        updateView(character)
-                        dialog.cancel()
-                    }, { error ->
-                        dialog.cancel()
-                        toast(getString(R.string.error_message))
-                      //  Log.d("TAG", error.toString())
-                    })
+                val observable = service.getCharacter("")
+                observable
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ character ->
+                            character.time = Date().toString()
+                            saveCharacter(character)
+                            searchFilms(character)
+                            //Log.d("TAG", character.name)
+                            updateView(character)
+                            dialog.cancel()
+                        }, { error ->
+                            dialog.cancel()
+                            toast(getString(R.string.error_message))
+                            //  Log.d("TAG", error.toString())
+                        })
+            }
+        }
+        else{
+            toast(getString(R.string.error_message))
         }
     }
 

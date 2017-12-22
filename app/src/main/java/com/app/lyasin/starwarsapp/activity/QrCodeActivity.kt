@@ -11,13 +11,13 @@ import org.jetbrains.anko.startActivity
 
 class QrCodeActivity : PermissionsActivity() , ZXingScannerView.ResultHandler  {
 
-    private var mScannerView: ZXingScannerView? = null
+    private var scannerView: ZXingScannerView? = null
 
     public override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         checkPermission()
-        mScannerView = ZXingScannerView(this)
-        setContentView(mScannerView)
+        scannerView = ZXingScannerView(this)
+        setContentView(scannerView)
     }
 
     private fun checkPermission(){
@@ -38,19 +38,18 @@ class QrCodeActivity : PermissionsActivity() , ZXingScannerView.ResultHandler  {
 
     public override fun onResume() {
         super.onResume()
-        mScannerView?.setResultHandler(this) // Register ourselves as a handler for scan results.
-        mScannerView?.startCamera()          // Start camera on resume
+        scannerView?.setResultHandler(this)
+        scannerView?.startCamera()
     }
 
     public override fun onPause() {
         super.onPause()
-        mScannerView?.stopCamera()           // Stop camera on pause
+        scannerView?.stopCamera()
     }
 
     override fun handleResult(rawResult: Result) {
         startActivity<CharacterActivity>(getString(R.string.from_qrcode) to rawResult.text)
 
-       // mScannerView?.resumeCameraPreview(this)
     }
 
 }

@@ -26,13 +26,13 @@ class MainActivity : AppCompatActivity() {
         getAllCharacters()
     }
 
-    private fun getAllCharacters(){
+    fun getAllCharacters(){
         charactersList.clear()
         charactersList.addAll(realm.where(Character::class.java).findAll())
         updateView()
     }
 
-    private fun updateView(){
+    fun updateView(){
         rv_characters.adapter = CharactersAdapter(charactersList, this)
         val llm = LinearLayoutManager(this)
         llm.orientation = LinearLayoutManager.VERTICAL

@@ -1,11 +1,11 @@
 # SWAPP
 Aplicativo Android que busca informações, através de QR Code, sobre personagens de Star Wars e armazena os personagens lidos.
 
-##APIs
+## APIs
 Personagens de Star Wars: ​http://swapi.co/api/people/1/
 Posters dos filmes: http://www.omdbapi.com/
 
-###Desenvolvido com:
+### Desenvolvido com:
 * [Kotlin](https://kotlinlang.org/) - Linguagem de Programação
 * [Realm](https://realm.io/)
 * [Anko](https://github.com/Kotlin/anko)
@@ -15,4 +15,5 @@ Posters dos filmes: http://www.omdbapi.com/
 * [Glide](https://bumptech.github.io/glide/)
 
 ###Telas
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/wMhGj"><a href="//imgur.com/wMhGj"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+[Imgur](https://i.imgur.com/cicJbcQ.png)
+[Imgur](https://i.imgur.com/fh59oQy.png)
